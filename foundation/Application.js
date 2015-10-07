@@ -1,5 +1,6 @@
 import path from 'path';
 
+import {Router} from './http/Router.js';
 import {PluginManager} from './plugins/PluginManager.js';
 import {PortFinder} from './utililities/PortFinder.js';
 import Hapi from 'hapi';
@@ -39,6 +40,7 @@ export class Application {
 
     constructor() {
         this.server = new Hapi.Server();
+        Router.server = this.server;
         this.pluginManager = new PluginManager();
     }
 
@@ -53,6 +55,7 @@ export class Application {
         } catch (error) {
             console.error('Error during booting the application.');
             console.error(error);
+            console.error(error.stack);
         }
     }
 
